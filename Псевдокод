@@ -1,0 +1,9 @@
+FOR i от 1 до n:
+  FOR j от 1 до N:
+    U[i][j] = 0
+    L[i][j] = 0
+  L[i][i] = 1
+FOR i от 1 до n:
+  FOR j от 1 до n:
+    if i <= j: U[i][j] = A[i][j] - СУММА(k: от 1 до i-1)(L[i][k]*U[k][j])
+    if i> j: L[i][j] = (A[i][j] - СУММА(k: от 1 до j-1)(L[i][k]*U[k][j])) / U[j][j]
