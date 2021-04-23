@@ -2,26 +2,16 @@
 #include <vector>
 #include <fstream>
 #include "queue.h"
+#include <algorithm>
+#include "push_relabel.h"
 
 using namespace std;
 
-struct edge{
-    int u;//first node
-    int v;//second node
-    int c;//capacity
-    int f;//flow
-};
-
-struct node{
-    int number;
-    int e;//error
-    int h;//height
-    vector<edge> edges;
-};
-
-vector<node> vertexes;
 
 int main() {
+    std::vector<node> nodes;
+    std::vector<std::vector<edge> > edges;
+
     fstream in;
     in.open("C:\\Users\\dima-\\Desktop\\input.txt", ios::in);
     if (!in.is_open()){
@@ -31,23 +21,24 @@ int main() {
     int n, m;
     in >> n>> m;
 
-    for (int i = 0; i < n; i++)
-        vertexes.push_back(node{i, 0,0});
-
-    vertexes[0].h = n;
+    for (int i = 0; i < n; i++) {
+        nodes.push_back(node{i, 0, 0});
+        vector<edge> b(n);
+        fill(b.begin(), b.end(), edge{0,0});
+        edges.push_back(b);
+    }
+    nodes[0].h = n;
 
     for (int i =0; i < m; i++){
         int f, s, c;
         in >> f>>s>>c;
-        edge k{f-1,s-1,c,0};
 
-        if (k.u == 0)
-            k.f = k.c;
-        if (k.v == 0)
-            k.f = -k.c;
-
-        vertexes[f-1].edges.push_back(k);
+        edges[f-1][s-1] = edge{c,0};
+        edges[s-1][f-1] = edge{-c, 0};
+        nodes[f-1].neighbours.push_back(s-1);
     }
+
+    push_relabel a(nodes, edges);
     in.close();
     return 0;
 }

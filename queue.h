@@ -1,5 +1,8 @@
 #ifndef GRAPH_PROJECT_QUEUE_H
 #define GRAPH_PROJECT_QUEUE_H
+#include <iostream>
+#include <exception>
+#include <vector>
 
 
 template<typename V>
@@ -9,19 +12,22 @@ public:
         f = 0;
     }
     void push (V e){
-        this->array.push_back(e);
+        array.push_back(e);
     }
     V pop(){
-        if (this->f == this->array.size())
-            return nullptr;
+        if (f == array.size())
+            throw "Out";
         else
-            return this->array[this->f++];
+            return array[f++];
     }
     V top(){
-        if (this->f == this->array.size())
-            return nullptr;
+        if (f == array.size())
+            throw "Out";
         else
-            return this->array[this->f];
+            return array[f];
+    }
+    int size(){
+        return array.size() - f;
     }
 private:
     std::vector<V> array;
