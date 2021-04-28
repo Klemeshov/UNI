@@ -3,6 +3,7 @@
 #include <iostream>
 #include <exception>
 #include <vector>
+#include <cassert>
 
 
 template<typename V>
@@ -15,19 +16,18 @@ public:
         array.push_back(e);
     }
     V pop(){
-        if (f == array.size())
-            throw "Out";
-        else
-            return array[f++];
+        assert(f != array.size());
+        return array[f++];
     }
     V top(){
-        if (f == array.size())
-            throw "Out";
-        else
-            return array[f];
+        assert(f != array.size());
+        return array[f];
     }
     int size(){
         return array.size() - f;
+    }
+    bool empty(){
+        return size() == 0;
     }
 private:
     std::vector<V> array;

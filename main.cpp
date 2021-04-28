@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "queue.h"
 #include <algorithm>
 #include "push_relabel.h"
 
@@ -27,18 +26,19 @@ int main() {
         fill(b.begin(), b.end(), edge{0,0});
         edges.push_back(b);
     }
-    nodes[0].h = n;
 
     for (int i =0; i < m; i++){
         int f, s, c;
         in >> f>>s>>c;
-
-        edges[f-1][s-1] = edge{c,0};
-        edges[s-1][f-1] = edge{-c, 0};
-        nodes[f-1].neighbours.push_back(s-1);
+        f--;s--;
+//        cout << f<<' '<<s<<' '<<c<<endl;
+        edges[f][s] = edge{c,0};
+        nodes[f].neighbours.push_back(s);
     }
 
     push_relabel a(nodes, edges);
+
+    cout<< a.max_flow(0,n-1);
     in.close();
     return 0;
 }
