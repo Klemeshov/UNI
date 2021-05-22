@@ -96,7 +96,7 @@ vector<node> push_relabel::dfs(int u){
     return ans;
 };
 
-vector<node> push_relabel::cut(int s, int t) {
+vector<node> push_relabel::min_cut(int s, int t) {
     max_flow(s, t);
     fill(isVisit.begin(), isVisit.end(), 0);
     return dfs(s);

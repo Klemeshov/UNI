@@ -4,7 +4,6 @@
 #include "queue.h"
 
 
-
 struct edge{
     int c;//capacity
     int f;//flow
@@ -24,7 +23,7 @@ public:
     push_relabel(std::vector<node> nodes,std::vector<std::vector<edge> > edges);
 
     long long max_flow(int s, int t);
-    std::vector<node> cut(int s, int t);
+    std::vector<node> min_cut(int s, int t);
 private:
     void push(int u, int v);
     void relabel(int u);
