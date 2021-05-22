@@ -2,12 +2,14 @@
 #define GRAPH_PROJECT_PUSH_RELABEL_H
 #include <vector>
 #include "queue.h"
+#include <map>
 
 
 struct edge{
     int c;//capacity
     int f;//flow
 };
+
 
 struct node{
     int number;
@@ -20,7 +22,7 @@ struct node{
 
 class push_relabel {
 public:
-    push_relabel(std::vector<node> nodes,std::vector<std::vector<edge> > edges);
+    push_relabel(const std::vector<node>& nodes,std::map<std::pair<int, int>, edge> edges);
 
     long long max_flow(int s, int t);
     std::vector<node> min_cut(int s, int t);
@@ -30,10 +32,10 @@ private:
     void discharge(int u);
     std::vector<node> dfs(int u);
 
-    std::vector<bool> isVisit;
     std::vector<node> nodes;
-    std::vector<std::vector<edge> > edges;
+    std::map<std::pair<int, int>, edge> edges;
     queue<int> q;
+    std::vector<bool> isVisit;
 };
 
 
