@@ -1,44 +1,67 @@
 #include <iostream>
-#include <vector>
-#include <fstream>
-#include <algorithm>
+#include <SFML/graphics.hpp>
 #include "push_relabel.h"
 
 using namespace std;
-
+using namespace sf;
 
 int main() {
-    std::vector<node> nodes;
-    std::vector<std::vector<edge> > edges;
+    Image track;
 
-    fstream in;
-    in.open("C:\\Users\\dima-\\Desktop\\input.txt", ios::in);
-    if (!in.is_open()){
-        cout << "file is not open";
+    if (!track.loadFromFile("C:\\Users\\dima-\\Desktop\\banana1-gr-320.jpg")) {
+        // oops, loading failed, handle it
         return 0;
     }
-    int n, m;
-    in >> n>> m;
+    Vector2u size = track.getSize();
+    Color color = track.getPixel(1, 1); // gets the color of the upper left corner pixel
+    cout << size.x << ' ' << size.y;
 
-    for (int i = 0; i < n; i++) {
-        nodes.push_back(node{i, 0, 0});
-        vector<edge> b(n);
-        fill(b.begin(), b.end(), edge{0,0});
-        edges.push_back(b);
+    std::vector<node> nodes;
+    std::vector<std::vector<edge> > edges(size.x * size.y + 2, std::vector<edge>(size.x * size.y + 2));
+
+    //..построение графа по картинке(без S и T)
+    for (int i = 0; i < size.x; i++)
+        for (int j = 0; j < size.y; j++) {
+            //создадим вершину
+            nodes.push_back(node{int(size.y) * i + j, 0, 0, i, j});
+            //добавим ребро с i-1
+            if (i > 0) {
+                Color p1 = track.getPixel(i, j);
+                Color p2 = track.getPixel(i - 1, j);
+                edges[int(size.y) * i + j][int(size.y) * (i - 1) + j] = edge{std::abs(p1.r - p2.r), 0};
+                edges[int(size.y) * (i - 1) + j][int(size.y) * i + j] = edge{std::abs(p1.r - p2.r), 0};
+            }
+            //добавим ребро с j-1
+            if (j > 0){
+                Color p1 = track.getPixel(i, j);
+                Color p2 = track.getPixel(i, j - 1);
+                edges[int(size.y) * i + j][int(size.y) * i + j - 1] = edge{std::abs(p1.r - p2.r), 0};
+                edges[int(size.y) * i + j - 1][int(size.y) * i + j] = edge{std::abs(p1.r - p2.r), 0};
+            }
+        }
+
+
+// Рендер картинки
+    RenderWindow window(VideoMode(size.x, size.y), "SFML Works!", Style::Close | Style::Titlebar);
+
+    Texture t;
+    t.loadFromImage(track);
+    Sprite s;
+    s.setTexture(t);
+
+    // Главный цикл приложения. Выполняется, пока открыто окно
+    while (window.isOpen()) {
+        // Обрабатываем очередь событий в цикле
+        Event event;
+        while (window.pollEvent(event)) {
+            // Пользователь нажал на «крестик» и хочет закрыть окно?
+            if (event.type == Event::Closed)
+                window.close();
+        }
+
+        window.draw(s);
+        // Отрисовка окна
+        window.display();
     }
-
-    for (int i =0; i < m; i++){
-        int f, s, c;
-        in >> f>>s>>c;
-        f--;s--;
-//        cout << f<<' '<<s<<' '<<c<<endl;
-        edges[f][s] = edge{c,0};
-        nodes[f].neighbours.push_back(s);
-    }
-
-    push_relabel a(nodes, edges);
-
-    cout<< a.max_flow(0,n-1);
-    in.close();
     return 0;
 }
