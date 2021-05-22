@@ -13,8 +13,6 @@ int main() {
         return 0;
     }
     Vector2u size = track.getSize();
-    Color color = track.getPixel(1, 1); // gets the color of the upper left corner pixel
-    cout << size.x << ' ' << size.y;
 
     std::vector<node> nodes;
     std::vector<std::vector<edge> > edges(size.x * size.y + 2, std::vector<edge>(size.x * size.y + 2));
@@ -32,12 +30,19 @@ int main() {
                 edges[int(size.y) * (i - 1) + j][int(size.y) * i + j] = edge{std::abs(p1.r - p2.r), 0};
             }
             //добавим ребро с j-1
-            if (j > 0){
+            if (j > 0) {
                 Color p1 = track.getPixel(i, j);
                 Color p2 = track.getPixel(i, j - 1);
                 edges[int(size.y) * i + j][int(size.y) * i + j - 1] = edge{std::abs(p1.r - p2.r), 0};
                 edges[int(size.y) * i + j - 1][int(size.y) * i + j] = edge{std::abs(p1.r - p2.r), 0};
             }
+            //добавим ребро с j-1 i-1
+//            if (j > 0 && i > 0) {
+//                Color p1 = track.getPixel(i, j);
+//                Color p2 = track.getPixel(i - 1, j - 1);
+//                edges[int(size.y) * i + j][int(size.y) * (i - 1) + j - 1] = edge{std::abs(p1.r - p2.r), 0};
+//                edges[int(size.y) * (i - 1) + j - 1][int(size.y) * i + j] = edge{std::abs(p1.r - p2.r), 0};
+//            }
         }
 
 
