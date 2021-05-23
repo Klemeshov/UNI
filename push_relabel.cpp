@@ -94,8 +94,8 @@ vector<node> push_relabel::dfs(int u){
     ans.push_back(nodes[u]);
 
     for (auto v : nodes[u].neighbours)
-        if(edges[{u, v}].c - edges[{u, v}].f > 0)
-            for (auto& k: dfs(v))
+        if(edges[{u, nodes[v].number}].c - edges[{u, nodes[v].number}].f > 0)
+            for (auto& k: dfs(nodes[v].number))
                 ans.push_back(k);
 
     return ans;
