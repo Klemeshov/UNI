@@ -1,0 +1,7 @@
+D:\Projects\Cursach\Cursach\bin\Debug\Cursach.exe.config
+D:\Projects\Cursach\Cursach\bin\Debug\Cursach.exe
+D:\Projects\Cursach\Cursach\bin\Debug\Cursach.pdb
+D:\Projects\Cursach\Cursach\obj\Debug\Cursach.csprojAssemblyReference.cache
+D:\Projects\Cursach\Cursach\obj\Debug\Cursach.csproj.CoreCompileInputs.cache
+D:\Projects\Cursach\Cursach\obj\Debug\Cursach.exe
+D:\Projects\Cursach\Cursach\obj\Debug\Cursach.pdb
