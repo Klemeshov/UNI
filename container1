@@ -1,0 +1,6 @@
+FROM python:3.9
+RUN apt-get update && apt-get install -y sqlite3
+COPY database.db /app/database.db
+WORKDIR /app
+EXPOSE 3306
+CMD ["sqlite3", "database.db"]

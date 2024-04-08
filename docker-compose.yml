@@ -1,0 +1,16 @@
+version: '3'
+services:
+  container1:
+    build:
+      dockerfile: ./container1
+    volumes:
+      - ./database.db:/app/database.db
+    command: ["tail", "-f", "/dev/null"]
+    ports:
+      - '3306:3306'
+
+  container2:
+    build:
+      dockerfile: ./container2
+    depends_on:
+      - container1
