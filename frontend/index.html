@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простое Фронтенд Приложение</title>
+    <style>
+        /* Простые стили для отображения */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<button id="getDataBtn">Ping</button>
+<div id="responseContainer"></div>
+
+<script>
+    document.getElementById('getDataBtn').addEventListener('click', async () => {
+        document.getElementById('responseContainer').innerText = 'Loading...';
+        try {
+            console.log(window.location.origin);
+            const response = await fetch('http://localhost:3000/ping');
+            const data = await response.json();
+            document.getElementById('responseContainer').innerText = JSON.stringify(data);
+        } catch (error) {
+            console.error('Ошибка получения данных:', error);
+        }
+    });
+</script>
+</body>
+</html>
