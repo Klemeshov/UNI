@@ -2,13 +2,13 @@ const fs = require('fs');
 
 const data = [];
 
-const min = 5;
-const max = 8;
+const min = 4;
+const max = 6;
 let stringLength = Math.floor(Math.random() * (max - min + 1)) + min;
 
 
-const minDataLength = 2 ** (stringLength - 2);
-const maxDataLength = (2 ** stringLength) - 1
+const minDataLength = 1;
+const maxDataLength = Math.min(2 ** stringLength - 1, 55);
 let length = Math.floor(Math.random() * (maxDataLength - minDataLength + 1)) + minDataLength;
 
 // stringLength = 6;

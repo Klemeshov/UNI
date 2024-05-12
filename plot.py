@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 
 # Чтение данных из файла
 with open('test.txt', 'r') as file:
-    data = file.read().split('\n\n')
+    data = file.read().split('\n\n\n')
+
 
 def time_numVariables():
     x = []  # количество переменных
@@ -25,6 +26,7 @@ def time_numVariables():
     plt.ylabel('Время работы')
     plt.show()
 
+
 def time_numTerms():
     x = []  # количество переменных
     y = []  # время работы алгоритма Квайна Маккласки
@@ -43,6 +45,7 @@ def time_numTerms():
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
     plt.show()
+
 
 def quine_numTerms():
     x = []  # количество переменных
@@ -63,6 +66,7 @@ def quine_numTerms():
     plt.ylabel('Время работы')
     plt.show()
 
+
 def buildMatrix_numTerms():
     x = []  # количество переменных
     y = []  # время работы алгоритма Квайна Маккласки
@@ -81,6 +85,7 @@ def buildMatrix_numTerms():
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
     plt.show()
+
 
 def resolveMatrix_numTerms():
     x = []  # количество переменных
@@ -101,6 +106,7 @@ def resolveMatrix_numTerms():
     plt.ylabel('Время работы')
     plt.show()
 
+
 def quine6_numTerms():
     x = []  # количество переменных
     y = []  # время работы алгоритма Квайна Маккласки
@@ -119,6 +125,7 @@ def quine6_numTerms():
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
     plt.show()
+
 
 def quine7_numTerms():
     x = []  # количество переменных
@@ -139,6 +146,7 @@ def quine7_numTerms():
     plt.ylabel('Время работы')
     plt.show()
 
+
 def quine8_numTerms():
     x = []  # количество переменных
     y = []  # время работы алгоритма Квайна Маккласки
@@ -158,4 +166,65 @@ def quine8_numTerms():
     plt.ylabel('Время работы')
     plt.show()
 
-quine8_numTerms()
+
+def karno_numVariables():
+    x = []
+    y = []
+    for block in data:
+        lines = block.split('\n')
+        if len(lines) < 2:
+            continue
+        vars_count, pos_terms_count = map(int, lines[0].split())
+        karno_time, = map(int, lines[1].split())
+
+        x.append(vars_count)
+        y.append(karno_time)
+
+    plt.plot(x, y, marker='o', linestyle='none')
+    plt.title('Время работы алгоритма карты Карно от количества переменных')
+    plt.xlabel('Количество переменных')
+    plt.ylabel('Время работы')
+    plt.show()
+
+
+def karno_numTerms():
+    x = []
+    y = []
+    for block in data:
+        lines = block.split('\n')
+        if len(lines) < 2:
+            continue
+        vars_count, pos_terms_count = map(int, lines[0].split())
+        karno_time, = map(int, lines[1].split())
+
+        x.append(pos_terms_count)
+        y.append(karno_time)
+
+    plt.plot(x, y, marker='o', linestyle='none')
+    plt.title('Время работы алгоритма карты Карно от количества положительных терм')
+    plt.xlabel('Количество положительных терм')
+    plt.ylabel('Время работы')
+    plt.show()
+
+
+def karno6_numTerms():
+    x = []
+    y = []
+    for block in data:
+        lines = block.split('\n')
+        if len(lines) < 2:
+            continue
+        vars_count, pos_terms_count = map(int, lines[0].split())
+        karno_time, = map(int, lines[1].split())
+        if vars_count == 6:
+            x.append(pos_terms_count)
+            y.append(karno_time)
+
+    plt.plot(x, y, marker='o', linestyle='none')
+    plt.title('Время работы алгоритма карты Карно при 6 переменных')
+    plt.xlabel('Количество положительных терм')
+    plt.ylabel('Время работы')
+    plt.show()
+
+
+karno6_numTerms()

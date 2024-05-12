@@ -1,8 +1,8 @@
-const { exec } = require('child_process');
+const {exec} = require('child_process');
 
-function runPrograms() {
+function runPrograms(run) {
     const program1 = 'node generator.js';
-    const program2 = 'node quine.js';
+    const program2 = run;
 
     exec(program1, (error, stdout) => {
         if (error) {
@@ -13,16 +13,17 @@ function runPrograms() {
 
         exec(program2, (error, stdout, stderr) => {
             if (error) {
-                console.error(`quine error: ${error.message}`);
+                console.error(`programm error: ${error.message}`);
                 return;
             }
-            console.log(`quine complete`);
+            console.log(`programm complete`);
 
             // Запускать программы циклично
-            runPrograms();
+            runPrograms(run);
         });
     });
 }
 
 // Запуск первой итерации
-runPrograms();
+runPrograms('node karno.js');
+// runPrograms('node quine.js');
