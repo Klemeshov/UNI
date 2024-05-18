@@ -124,6 +124,7 @@ fs.readFile('data.json', 'utf8', (err, data) => {
     const secondTime = Date.now() - start - firstTime;
 
     const selectedImplicants = selectMinimumCover(coverageTable, primeImplicants);
+    console.log(selectedImplicants);
     const thirdTime = Date.now() - start - firstTime - secondTime;
 
     fs.appendFile('test.txt', `${firstTime} ${secondTime} ${thirdTime}\n\n`, (err) => {

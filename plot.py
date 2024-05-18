@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Чтение данных из файла
 with open('test.txt', 'r') as file:
-    data = file.read().split('\n\n\n')
+    data = file.read().split('\n\n')
 
 
 def time_numVariables():
@@ -20,10 +20,21 @@ def time_numVariables():
         x.append(vars_count)
         y.append(quine_time + map_time + coverage_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время работы алгоритма Квайна Маккласки от количества переменных')
-    plt.xlabel('Количество переменных')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество переменных')
+    axs[0].set_ylabel('Время работы, ms')
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество переменных')
+    axs[1].set_ylabel('Время работы, ms')
+    # Отображение графиков
     plt.show()
 
 
@@ -40,10 +51,29 @@ def time_numTerms():
         x.append(pos_terms_count)
         y.append(quine_time + map_time + coverage_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время работы алгоритма Квайна Маккласки от количества положительных термов')
-    plt.xlabel('Количество термов')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество термов')
+    axs[0].set_ylabel('Время работы, ms')
+    axs[0].axvline(x=64)
+    axs[0].axvline(x=128)
+    axs[0].axvline(x=256)
+    axs[0].axvline(x=512)
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество термов')
+    axs[1].set_ylabel('Время работы, ms')
+    axs[1].axvline(x=64)
+    axs[1].axvline(x=128)
+    axs[1].axvline(x=256)
+    axs[1].axvline(x=512)
+    # Отображение графиков
     plt.show()
 
 
@@ -60,10 +90,29 @@ def quine_numTerms():
         x.append(pos_terms_count)
         y.append(quine_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время работы поиска минтермов от количества положительных термов')
-    plt.xlabel('Количество термов')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество термов')
+    axs[0].set_ylabel('Время работы, ms')
+    axs[0].axvline(x=64)
+    axs[0].axvline(x=128)
+    axs[0].axvline(x=256)
+    axs[0].axvline(x=512)
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество термов')
+    axs[1].set_ylabel('Время работы, ms')
+    axs[1].axvline(x=64)
+    axs[1].axvline(x=128)
+    axs[1].axvline(x=256)
+    axs[1].axvline(x=512)
+    # Отображение графиков
     plt.show()
 
 
@@ -84,6 +133,10 @@ def buildMatrix_numTerms():
     plt.title('Время строительства матрицы покрытий от количества положительных термов')
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
+    plt.axvline(x=64)
+    plt.axvline(x=128)
+    plt.axvline(x=256)
+    plt.axvline(x=512)
     plt.show()
 
 
@@ -104,6 +157,10 @@ def resolveMatrix_numTerms():
     plt.title('Время решения задачи о минимальном покрытии от количества положительных термов')
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
+    plt.axvline(x=64)
+    plt.axvline(x=128)
+    plt.axvline(x=256)
+    plt.axvline(x=512)
     plt.show()
 
 
@@ -121,9 +178,9 @@ def quine6_numTerms():
             y.append(quine_time)
 
     plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время время поиска минтермов при 6 переменных от количества положительных термов')
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
+    plt.axvline(x=64)
     plt.show()
 
 
@@ -141,9 +198,9 @@ def quine7_numTerms():
             y.append(quine_time)
 
     plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время время поиска минтермов при 7 переменных от количества положительных термов')
     plt.xlabel('Количество термов')
     plt.ylabel('Время работы')
+    plt.axvline(x=128)
     plt.show()
 
 
@@ -160,10 +217,55 @@ def quine8_numTerms():
             x.append(pos_terms_count)
             y.append(quine_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время время поиска минтермов при 8 переменных от количества положительных термов')
-    plt.xlabel('Количество термов')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество термов')
+    axs[0].set_ylabel('Время работы, ms')
+    axs[0].axvline(x=256)
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество термов')
+    axs[1].set_ylabel('Время работы, ms')
+    axs[1].axvline(x=256)
+    # Отображение графиков
+    plt.show()
+
+
+def quine9_numTerms():
+    x = []  # количество переменных
+    y = []  # время работы алгоритма Квайна Маккласки
+    for block in data:
+        lines = block.split('\n')
+        if len(lines) < 2:
+            continue
+        vars_count, pos_terms_count = map(int, lines[0].split())
+        quine_time, map_time, coverage_time = map(int, lines[1].split())
+        if vars_count == 9:
+            x.append(pos_terms_count)
+            y.append(quine_time)
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество термов')
+    axs[0].set_ylabel('Время работы, ms')
+    axs[0].axvline(x=512)
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество термов')
+    axs[1].set_ylabel('Время работы, ms')
+    axs[1].axvline(x=512)
+    # Отображение графиков
     plt.show()
 
 
@@ -180,10 +282,21 @@ def karno_numVariables():
         x.append(vars_count)
         y.append(karno_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время работы алгоритма карты Карно от количества переменных')
-    plt.xlabel('Количество переменных')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество переменных')
+    axs[0].set_ylabel('Время работы, ms')
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество переменных')
+    axs[1].set_ylabel('Время работы, ms')
+    # Отображение графиков
     plt.show()
 
 
@@ -200,10 +313,21 @@ def karno_numTerms():
         x.append(pos_terms_count)
         y.append(karno_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время работы алгоритма карты Карно от количества положительных терм')
-    plt.xlabel('Количество положительных терм')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество положительных терм')
+    axs[0].set_ylabel('Время работы, ms')
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество положительных терм')
+    axs[1].set_ylabel('Время работы, ms')
+    # Отображение графиков
     plt.show()
 
 
@@ -220,11 +344,33 @@ def karno6_numTerms():
             x.append(pos_terms_count)
             y.append(karno_time)
 
-    plt.plot(x, y, marker='o', linestyle='none')
-    plt.title('Время работы алгоритма карты Карно при 6 переменных')
-    plt.xlabel('Количество положительных терм')
-    plt.ylabel('Время работы')
+    _, axs = plt.subplots(1, 2, figsize=(10, 5))
+
+    # Первый график (обычный)
+    axs[0].plot(x, y, marker='.', linestyle='none')
+    axs[0].set_title('Обычный график')
+    axs[0].set_xlabel('Количество положительных терм')
+    axs[0].set_ylabel('Время работы, ms')
+
+    # Второй график (с логарифмической шкалой по оси y)
+    axs[1].plot(x, y, marker='.', linestyle='none')
+    axs[1].set_yscale('log')
+    axs[1].set_title('График с логарифмической шкалой')
+    axs[1].set_xlabel('Количество положительных терм')
+    axs[1].set_ylabel('Время работы, ms')
+    # Отображение графиков
     plt.show()
 
 
-karno6_numTerms()
+# time_numVariables()
+# time_numTerms()
+# quine_numTerms()
+# buildMatrix_numTerms()
+# resolveMatrix_numTerms()
+# quine6_numTerms()
+# quine7_numTerms()
+# quine8_numTerms()
+# quine9_numTerms()
+# karno_numVariables()
+# karno_numTerms()
+# karno6_numTerms()
